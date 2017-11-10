@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script language='javascript' src="js/vuejs.js"></script>
+    <script src="js/jquery.min.js"               type="text/javascript" ></script>
+    <link   href="css/bootstrap.min.css"          rel="stylesheet" type="text/css" />
+    <script  src="js/bootstrap.min.js"           type="text/javascript"></script>
+  </head>
+  <body>
+
+  <div id="app">
+      {{ message }}
+
+      <todo-item></todo-item>
+
+  </div>
+
+
+   <script>
+
+Vue.component('todo-item', {   template: '<li>Это todo</li>' })
+
+   var app = new Vue({
+       el: '#app',
+       data: {
+             message: 'Hello Vue!'
+       },
+       methods: {
+          reverseMessage: function () {
+               this.message = this.message.split('').reverse().join('')
+          }
+       }
+   })
+
+   </script>
+  </body>
+</html>
+

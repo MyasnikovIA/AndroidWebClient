@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+     <script type="text/javascript"  src="js/jquery.min.js"></script>
+     <script type="text/javascript"  src="js/bootstrap.min.js"></script>
+     <link   rel="stylesheet"        href="css/bootstrap.min.css"/>
+     -->
+    <script src="js/jquery.min.js"               type="text/javascript" ></script>
+    <link   href="css/bootstrap.min.css"          rel="stylesheet" type="text/css" />
+    <script  src="js/bootstrap.min.js"           type="text/javascript"></script>
+    <link   href="css/bootstrap-multiselect.css"  rel="stylesheet" type="text/css" />
+    <script  src="js/bootstrap-multiselect.js"   type="text/javascript"></script>
+
+    <script language='javascript' src="js/vuejs.js"></script>
+
+
+    <link rel='stylesheet' type='text/css' href='css/bootstrap-select.min.css'>
+    <script language='javascript' src="js/bootstrap-select.min.js"></script>
+
+
+</head>
+<body>
+<br>
+<!-- <textarea  style="height:100%; width: 100%; margin: 0; padding: 0; border-width: 0; "></textarea>-->
+<br>
+<script>
+
+         Start=function(){
+              if (document.getElementById("IsAutorization").value==='on'){
+                 IsAutorization='1';
+              }else{
+                 IsAutorization='0';
+              }
+              Srv.StartServer(
+                      document.getElementById("UserName").value
+                     ,document.getElementById("UserPass").value
+                     ,document.getElementById("UserPort").value
+                     ,"1000"
+                     ,document.getElementById("DefaultHost").value
+                     ,IsAutorization);
+           //   Srv.StartServer("user","user","8080","1000","index.htm","1")
+          }
+         Stop=function(){
+              Srv.StopServer(8080);
+              Android.alert('сервер остановлен');
+          }
+         Test=function(){
+             Srv.getLocalBrouser(8080);
+         }
+
+            var conf=JSON.parse( Srv.readConfig('8080') );
+            document.getElementById("UserName").value='';
+            document.getElementById("UserPass").value='';
+            document.getElementById("UserPort").value=conf.UserPort;
+            document.getElementById("DefaultHost").value=conf.DefaultHost;
+            if (conf.IsAutorization=="1"){
+               document.getElementById("IsAutorization").checked="true";
+            }
+
+
+     </script>
+
+
+<br><br><br><br><br><br>
+
+<br>
+
+<div class="text-center">
+    <!-- Button HTML (to Trigger Modal) -->
+    <a href="#myModal" class="trigger-btn" data-toggle="modal">Click to Open Confirm Modal</a>
+</div>
+
+<!-- Modal HTML -->
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="icon-box">
+                    <i class="glyphicon glyphicon-remove "></i>
+                </div>
+                <h4 class="modal-title">Sorry!</h4>
+            </div>
+            <div class="modal-body">
+                <p class="text-center">Your transaction has failed. Please go back and try again.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger btn-block" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+https://jqueryui.com/dialog/
+
+
+
+<br><br><br>
+
+<div class="text-center">
+    <!-- Button HTML (to Trigger Modal) -->
+    <a href="#myModalLogin" class="trigger-btn" data-toggle="modal">Click to Open Login Modal</a>
+</div>
+
+<!-- Modal HTML -->
+<div id="myModalLogin" class="modal fade">
+    <div class="modal-dialog modal-login">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Member Login</h4>
+            </div>
+            <div class="modal-body">
+                <form action="/examples/actions/confirmation.php" method="post">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="username" placeholder="Username" required="required">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="password" placeholder="Password" required="required">
+                    </div>
+                    <div class="form-group">
+                        <button  class="btn btn-primary btn-lg btn-block login-btn">Login</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="#">Forgot Password?</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  ===================================   -->
+<!--  ===================================   -->
+<!--  ===================================   -->
+<!--  ===================================   -->
+
+
+
+<input type="button" id="btnSelected" value="Get Selected" class="btn btn-default" onclick='GetSelect()' />
+<br>
+<select id="lstFruits" multiple="multiple">
+    <option value="9"  selected="selected"> ГВ </option>
+    <option value="2"  selected="selected"> ТЭ </option>
+    <option value="3"  selected="selected"> Установка ОДПУ </option>
+    <option value="9|2"> ГВ пеня </option>
+    <option value="2|2"> ТЭ пени </option>
+</select>
+
+<br>
+<br>
+<select id="lstFruits2" class="btn btn-default" >
+    <option value="0,1,2"  selected="selected" >Любой</option>
+    <option value="0">открытый</option>
+    <option value="1">закрытый</option>
+    <option value="2">расторгнутый</option>
+</select>
+
+
+<script type="text/javascript">
+        
+            $('#lstFruits').multiselect({ includeSelectAllOption: true    });
+			$('#lstFruits2').multiselect({ includeSelectAllOption: true    });
+			
+			GetSelect=function(){
+			    var selected = $("#lstFruits option:selected");
+                var message = "";
+                selected.each(function () {
+                    message += $(this).text() + " " + $(this).val() + "\n";
+                });
+                Android.alert(message);
+			}
+			/*
+            $('#btnSelected').click(function () {
+                var selected = $("#lstFruits option:selected");
+                var message = "";
+                selected.each(function () {
+                    message += $(this).text() + " " + $(this).val() + "\n";
+                });
+                Android.alert(message);
+            });
+			*/
+        
+    </script>
+
+
+
+
+<link rel="stylesheet" href="css/jqueryui.css">
+<script src="js/jqueryui.js"></script>
+<script src="js/jqueryuimobile.js"></script>
+
+
+<style>
+    #draggable { width: 150px; height: 150px; padding: 0.5em; }
+</style>
+<script>
+  $( function() {
+    $( "#draggable" ).draggable();
+  } );
+  </script>
+<div id="draggable" class="ui-widget-content">
+    <p>Drag me around</p>
+</div>
+
+
+
+
+<script>
+   $( function() {
+    $( "#accordion" ).accordion();
+  } );
+  </script>
+
+<div id="accordion">
+    <h3>Section 1</h3>
+    <div>
+        <p>
+            Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+            ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+            amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+            odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+        </p>
+    </div>
+    <h3>Section 2</h3>
+    <div>
+        <p>
+            Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
+            purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
+            velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
+            suscipit faucibus urna.
+        </p>
+    </div>
+    <h3>Section 3</h3>
+    <div>
+        <p>
+            Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
+            Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
+            ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
+            lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
+        </p>
+        <ul>
+            <li>List item one</li>
+            <li>List item two</li>
+            <li>List item three</li>
+        </ul>
+    </div>
+    <h3>Section 4</h3>
+    <div>
+        <p>
+            Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+            et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
+            faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
+            mauris vel est.
+        </p>
+        <p>
+            Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
+            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+            inceptos himenaeos.
+        </p>
+    </div>
+</div>
+
+
+
+
+
+<script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
+<p>Date: <input type="text" id="datepicker"></p>
+
+
+
+<script>
+  $( function() {
+    $( "#dialog" ).dialog();
+  } );
+  </script>
+<div id="dialog" title="Basic dialog">
+    <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+</div>
+
+
+<script>
+  $( function() {
+    var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+    ];
+    $( "#tags" ).autocomplete({
+      source: availableTags
+    });
+  } );
+  </script>
+<div class="ui-widget">
+    <label for="tags">Tags: </label>
+    <input id="tags">
+</div>
+
+
+
+
+<div id="ReportParams">
+    <div class='row'  >
+        <div class='col-sm-2 col-xs-4'>
+            <label class=''>
+                Тип услуги:
+            </label>
+        </div>
+        <div class='col-sm-10 col-xs-8'>
+            <select class='form-control selectpicker' id='ProdList' v-model='SelectProdList' title="Ничего не выбрано"  multiple>
+                <option value="9"  selected="selected"> ГВ </option>
+                <option value="2"  selected="selected"> ТЭ </option>
+                <option value="3"  > Установка ОДПУ </option>
+                <option value="9|2" selected="selected"> ГВ пеня </option>
+                <option value="2|2" selected="selected"> ТЭ пени </option>
+            </select>
+        </div>
+    </div>
+</div>
+<script>
+    	var vmodel = new Vue({
+			el: '#ReportParams',
+			data: {
+				SelectProdList:''
+			}
+      	});
+</script>
+
+
+</body>
+</html>
+
