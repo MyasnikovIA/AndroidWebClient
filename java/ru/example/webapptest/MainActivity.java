@@ -27,11 +27,9 @@ public class MainActivity extends Activity {
            sens=new SensorAndroid(this,webView);
            webView.addJavascriptInterface(sens, "Sensor");
 
-           //  webView.loadUrl("file:///android_asset/index.htm");
+           webView.loadUrl("file:///android_asset/index.htm");
            webView.loadUrl("file:///android_asset/examples/index.html");
            //  webView.loadUrl("https://www.cam-recorder.com/");
-           //  webView.loadUrl("https://alexandre.alapetite.fr/doc-alex/html5-webcam/index.en.html");
-           webView.loadUrl("http://212.164.223.134:7227/HTML.CacheLib.cls");
 
 
         PowerManager pm = (PowerManager)getSystemService( Context.POWER_SERVICE);
